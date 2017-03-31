@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+struct Vector{
+	int *data;
+	int size;
+	int capasite;
+	Vector(){
+		capasite = 10;
+		data = new int[capasite];
+		size= 0;
+	}
+	int get(){
+		if(size == capasite){
+			int *d= new int[capasite * 2];
+			for(int i =0; i < capasite; i++){
+				d[i] = data[i];
+			    return data[i];
+	}
+	void add(int val){
+		if(size == capasite){
+			int *d= new int[capasite * 2];
+			for(int i =0; i < capasite; i++){
+				d[i] = data[i];
+			}
+			delete data;
+			data = d;
+			capasite *= 2;
+		}
+		data[size] = val;
+		size++;
+		
+	}
+	~Vector(){
+		delete data;
+	}
+};
+
+
+int main() {
+	
+	system("pause");
+
+return 0;
+}
