@@ -1,0 +1,48 @@
+struct Node{
+  int value;                      
+  Node *left;
+  Node *right;
+};
+struct Tree{
+  Node* root;
+  
+  
+  
+  };
+  bool find(int val,Node*n){
+  if(n==NULL){
+  return false;
+  }
+    if(val == n->value){
+      return true;
+      }
+    if(val < n-> value){
+      return find(val,n->left);
+     }
+     return  find(val,n->right);                                 
+     }
+     
+     
+     
+void add(int val,Node*n){
+  if(val< n->val){
+    if(n-left !=NULL){
+      add(val,n->left);
+    }else{
+        n->left=new Node(va);
+     }
+   } else if(val>n->val){
+   
+   
+   
+   
+   
+   }
+   
+   
+   
+   
+     
+     
+     
+  
