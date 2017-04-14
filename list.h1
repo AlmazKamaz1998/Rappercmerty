@@ -1,0 +1,106 @@
+#pragma once
+struct node {
+	int value;
+	node* next;
+	node* prev;
+	
+	node(int value, node* next, node* prev) {
+		this->next = NULL;
+		this->prev = NULL;
+		value = 0;
+	}
+
+	node(int value) {
+		next = NULL;
+		prev = NULL;
+		this->value = value;
+	}
+
+	node(int value, node* prev) {
+		this->prev = prev;
+		next = NULL;
+		this->value = value;
+
+	}
+};
+struct list {
+	node* first = NULL;
+	node* last = NULL;
+	int size;
+
+	list() {
+		cout << "List constructor" << endl;
+		first = last = NULL;
+		size = 0;
+	}
+
+	void add(int value) {
+		if (first == NULL) {
+			first = last = new node(value);
+		}
+		else {
+
+			node* n = new node(value, last);
+			last->next = n;
+			last = n;
+
+		}
+		size++;
+	}
+
+	int get(int index) {
+		node* cur = first;
+		int i = 0;
+		while (i != index) {
+			cur = cur->next;
+			i++;
+		}
+		return cur->value;
+		return 0;
+	}
+
+	void remove(int index) {
+		node* cur = first;
+		int i = 0;
+		while (i != index) {
+			cur = cur->next;
+			i++;
+		}
+		if (cur->prev != NULL) {
+			cur->prev->next = cur->next;
+		}
+		else {
+			first = first->next;
+		}
+		if (cur->next != NULL) {
+			cur->next->prev = cur->prev;
+		}
+		else {
+			last = last->prev;
+		}
+		size--;
+	}
+
+	int size() {
+		return size;
+	}
+
+	void print() {
+		node* cur = first;
+		while (cur != NULL) {
+			cout << cur->value << endl;
+			cur = cur->next;
+		}
+	}
+
+	~list() {
+		node*cur = first;
+		cout << "List diss" << endl;
+		while (cur != NULL) {
+			node*t = cur->next;
+			delete cur;
+			cur = t;
+		}
+
+	}
+};
