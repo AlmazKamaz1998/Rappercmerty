@@ -34,14 +34,7 @@ struct vector {
 	}
 
 	int get(int index) {
-		if (size == capasity) {
-			int *d = new int[capasity * 2];
-			for (int i = 0; i < capasity; i++) {
-				d[i] = data[i];
-				return data[i];
-				return 0;
-			}
-		}
+		return data[index];
 	}
 
 	void remove(int index) {
@@ -55,6 +48,6 @@ struct vector {
 	}
 
 	~vector() {
-		delete data;
+		delete data[];
 	}
 };
