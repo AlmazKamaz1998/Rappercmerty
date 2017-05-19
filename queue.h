@@ -1,49 +1,49 @@
-#include <iostream>
- 
- using namespace std;
- 
-struct Queue {
-	int val;  
-	int size; 
-	Queue *Head,*Tail,*Next;
-        
+#pragma once
+
+/*
+Реализация структуры данных Очередь.
+Очередь - структура данных, которая работает по принципу FIFO.
+Внутреннее представление данных в очереди - список или вектор (что подходит лучше?).
+*/
+
+
+// раскомментируйте одну из следующих строк в зависимости от того, что Вы выбрали
+
+#include "list.h"
+
+struct queue {
+	list* l;
+	/* опишите поля очереди */
+
+	queue() {
+		l = new list();
+		// конструктор, в котором, возможно, нужно произвести какую-то инициализацию
+	}
+
+	// добавить новый элемент в очередь
+	void enqueue(int value) {
+		l->add(value);
+
+	}
+
+	// удалить первый элемент из очереди, вернуть удаляемое значение
+	int dequeue() {
+		int del = l->get(0);
+		l->remove(0);
+		return del;
+	}
+
+	// вернуть первый элемент из очереди (не удаляя его)
+	int first() {
+		return l->get(0);
+	}
+
+	// размер очереди
+	int size() {
+		return l->sise();
+	}
+
+	~queue() {
+		// деструктор, подчистить память, если это необходимо
+	}
 };
- 
-void Add(int val, Queue *&k){
-	int y = 0;
-	Queue *temp = new Queue;
-	temp->val = val;
-	temp->Head =k->Next;
-	temp->val=val;                
-	if (k->Head!=NULL){            
-		k->Tail->Next=temp;   
-		k->Tail=temp;          
-	} else k->Head=k->Tail=temp;      
-	y++;	
-	k->size=y;
-	
-}
-void Clear(Queue *k){		
- 
-	Queue *temp=new Queue;
-	int y = 0;
-	while (temp!=k->Tail){
-		temp=k->Head;
-		k->Head=k->Head->Next; 
-		delete temp;  
-	}	
-}
- 
- 
-int main(){
- 
- 
-	Queue *k = new Queue;  
-	k->Head=NULL;  
-	for (int i = 0; i < 10; i++)
-		Add(i, k);
-	Clear(k);
-	delete k->Head;
-		delete k;
-   return 0;
-}
