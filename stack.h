@@ -1,35 +1,48 @@
-#include <iostream>
-
-using namespace std;
-struct Stack{
-	int x; 
-	Stack *Next, *Head; 
-};
+#pragma once
 
 
-void Add(int x, Stack *&St){
-	Stack *temp = new Stack;
-	temp->x = x; 
-	temp->Next = St->Head; 
-	St->Head = temp; 
-}
+/*
+Реализация структуры данных Стэк.
+Стэк - структура данных, которая работает по принципу LIFO.
+Внутреннее представление данных в стэке - список или вектор (что подходит лучше?).
+*/
 
 
+// раскомментируйте одну из следующих строк в зависимости от того, что Вы выбрали
+#include "vector.h"
 
-void Clear(Stack *St){
-	while (St->Head != NULL) {
-		Stack *temp = St->Head->Next;
-		delete St->Head; 
-		St->Head = temp; 
+
+struct stack {
+	vector* v;
+
+	stack() {
+		v = new vector;
 	}
-}
 
-int main(){
-	Stack *St = new Stack; 
-	St->Head = NULL; 
-	for (int i = 0;i<10;i++) 
-		Add(i, St); 
-	Clear(St); 
-	delete St->Head;
-	delete St;
-}
+	// добавить новый элемент в стэк
+	void push(int value) {
+		v->add(value);
+
+	}
+
+	// удалить верхний элемент из стэка, вернуть удаляемое значение
+	int pop() {
+		int pip = v->get(size() - 1);
+		v->remove(size() - 1);
+		return pip;
+	}
+
+	// вернуть верхний элемент стэка (не удаляя его)
+	int top() {
+		return v->get(size());
+	}
+
+	// размер стэка
+	int size() {
+		return v->size;
+	}
+
+	~stack() {
+		delete[] v->data;
+	}
+}; 
